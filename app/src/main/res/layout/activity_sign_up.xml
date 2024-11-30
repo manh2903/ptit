@@ -13,7 +13,7 @@
         android:layout_height="80dp"
         android:layout_gravity="center"
         android:layout_marginTop="80dp"
-        android:src="@drawable/umbrella_logo_3" /><!-- end LOGO -->
+        android:src="@drawable/umbrella_logo_3" />
 
     <!-- SLOGAN -->
     <LinearLayout
@@ -44,17 +44,17 @@
             android:textSize="13sp"
             tools:ignore="RtlSymmetry" />
 
-    </LinearLayout><!-- end SLOGAN -->
+    </LinearLayout>
 
-    <!-- LOGIN WITH PHONE NUMBER -->
+    <!-- REGISTER WITH PHONE NUMBER -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
-        android:text="@string/login_with_phone_number"
+        android:text="dang ki"
         android:textColor="@color/colorTextBlack"
-        android:textSize="12sp" /><!-- end LOGIN WITH PHONE NUMBER -->
+        android:textSize="12sp" />
 
     <!-- INPUT PHONE NUMBER -->
     <LinearLayout
@@ -83,12 +83,12 @@
                 android:layout_weight="1"
                 android:hint="@string/phone_number"
                 android:inputType="phone"
-                android:text="@string/my_phone_number"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="12sp" />
 
-        </LinearLayout><!-- end INPUT PHONE NUMBER -->
+        </LinearLayout>
 
+        <!-- INPUT PASSWORD -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,23 +98,49 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:text="Mật khẩu"
+                android:text="@string/password"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="12sp" />
 
             <EditText
-                android:id="@+id/txtPassWord"
+                android:id="@+id/txtPassword"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_weight="1"
-                android:hint="@string/phone_number"
-                android:inputType="phone"
-                android:text="@string/my_phone_number"
+                android:hint="@string/password"
+                android:inputType="textPassword"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="12sp" />
 
-        </LinearLayout><!-- end INPUT PHONE NUMBER -->
+        </LinearLayout>
+
+        <!-- INPUT CONFIRM PASSWORD -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="@string/confirm_password"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/txtConfirmPassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_weight="1"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -122,12 +148,12 @@
         android:layout_width="match_parent"
         android:layout_height="50dp" />
 
-    <!-- BUTTON Get Authorization Code-->
+    <!-- REGISTER BUTTON -->
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnRegister"
         style="@style/button_style_danger"
         android:layout_gravity="center"
-        android:text="Login"
+        android:text="Đăng kí"
         android:textAllCaps="false" />
 
     <TextView
@@ -152,12 +178,13 @@
 
     <!-- REGISTER IF NO ACCOUNT -->
     <TextView
-        android:id="@+id/tv_signup"
+        android:id="@+id/tv_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="@string/no_account_register"
+        android:text="@string/login"
         android:textColor="@color/colorTextBlack"
         android:textSize="12sp" />
+
 </LinearLayout>

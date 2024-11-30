@@ -247,4 +247,8 @@
     <string name="repeat">Wiederholen</string>
     <string name="time">Zeit</string>
     <string name="humidity">Feuchtigkeit</string>
+    <string name="no_account_register">Nếu chưa có tài khoản, hãy <b>đăng ký</b> ngay.</string>
+    <string name="login">Nếu đã có tài khoản,  <b>đăng nhập</b> ngay.</string>
+    <string name="password">password</string>
+    <string name="confirm_password">confirm_password</string>
 </resources>
