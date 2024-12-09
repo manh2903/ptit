@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 //import com.example.do_an_tot_nghiep.Specialitypage.SpecialitypageActivity;
 import com.ndm.ptit.R;
 import com.ndm.ptit.enitities.Speciality;
+import com.ndm.ptit.enitities.speciality.SpecialityResponse;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -34,11 +35,11 @@ import java.util.List;
 public class SpecialityRecyclerView extends RecyclerView.Adapter<SpecialityRecyclerView.ViewHolder> {
 
     private Context context;
-    private List<Speciality> list;
+    private List<SpecialityResponse> list;
     private int layoutElement;// is the layout for the recyclerView, include 2 layouts: recycler_view_element_speciality
     // & recycler_view_element_speciality_2
 
-    public SpecialityRecyclerView(Context context, List<Speciality> list, int layoutElement)
+    public SpecialityRecyclerView(Context context, List<SpecialityResponse> list, int layoutElement)
     {
         this.context = context;
         this.list = list;
@@ -60,26 +61,26 @@ public class SpecialityRecyclerView extends RecyclerView.Adapter<SpecialityRecyc
     @Override
     @SuppressLint("ResourceType")
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Speciality element = list.get(position);
-//        String uploadUri = Constant.UPLOAD_URI();
+        SpecialityResponse element = list.get(position);
+        String uploadUri = element.getImage();
 
         int id = element.getId();
         String name = element.getName();
-//        String image = element.getImage().length() > 0 ?
-//                uploadUri + element.getImage() : context.getString(R.drawable.default_speciality);
+        String image = element.getImage().length() > 0 ?
+                uploadUri + element.getImage() : context.getString(R.drawable.default_speciality);
 
 
-//        if( element.getImage().length() > 0)
-//        {
-//            Picasso.get().load(image).into(holder.image);
-//        }
+        if( element.getImage().length() > 0)
+        {
+            Picasso.get().load(image).into(holder.image);
+        }
 
         holder.name.setText(name);
-        holder.layout.setOnClickListener(view->{
+//        holder.layout.setOnClickListener(view->{
 //            Intent intent = new Intent(context, SpecialitypageActivity.class);
 //            intent.putExtra("specialityId",String.valueOf(id) );
 //            context.startActivity(intent);
-        });
+//        });
     }
 
     @Override
@@ -93,13 +94,10 @@ public class SpecialityRecyclerView extends RecyclerView.Adapter<SpecialityRecyc
         private ImageView image;
         private TextView name;
 
-
-
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             layout = itemView.findViewById(R.id.elementLayout);
-//            image = itemView.findViewById(R.id.elementImage);
+            image = itemView.findViewById(R.id.elementImage);
             name = itemView.findViewById(R.id.elementName);
         }
     }

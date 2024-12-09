@@ -117,7 +117,7 @@
                     android:textColor="@color/colorBlue"
                     android:textSize="11sp" />
 
-            </LinearLayout><!-- end SPECIALITY - RECYCLER VIEW & BUTTON READ MORE -->
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewSpeciality"

@@ -83,7 +83,7 @@
                 android:layout_weight="1"
                 android:hint="@string/phone_number"
                 android:inputType="phone"
-                android:text="@string/my_phone_number"
+                android:text="0399703005"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="12sp" />
 
@@ -110,7 +110,7 @@
                 android:layout_weight="1"
                 android:hint="@string/phone_number"
                 android:inputType="phone"
-                android:text="@string/my_phone_number"
+                android:text="12345"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="12sp" />
 

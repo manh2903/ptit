@@ -47,4 +47,14 @@ public class LoginRespone {
     public void setData(Patient data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "LoginRespone{" +
+                "result=" + result +
+                ", msg='" + msg + '\'' +
+                ", accessToken='" + accessToken + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }

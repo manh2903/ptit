@@ -24,7 +24,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LogInActivity extends AppCompatActivity{
-
     private EditText txtPhoneNumber, txtPassWord;
     private TextView tv_signup;
     private Button btnLogin;
@@ -52,7 +51,6 @@ public class LogInActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(LogInActivity.this, SignUpActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -87,9 +85,10 @@ public class LogInActivity extends AppCompatActivity{
                 if (response.isSuccessful()) {
                     LoginRespone loginRespone = response.body();
                     if (loginRespone != null && loginRespone.getResult() == 1) {
+                        saveToken(loginRespone.getAccessToken());
                         Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                         startActivity(intent);
-                        finish();
+//                        finish();
                     } else {
                         DialogUtils.showErrorDialog(LogInActivity.this, loginRespone.getMsg());
                     }
@@ -106,4 +105,12 @@ public class LogInActivity extends AppCompatActivity{
             }
         });
     }
+
+    private void saveToken(String token) {
+        getSharedPreferences("user_prefs", MODE_PRIVATE)
+                .edit()
+                .putString("token", token)
+                .apply();
+    }
+
 }

@@ -1,14 +1,19 @@
 package com.ndm.ptit.fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -35,10 +40,16 @@ import androidx.recyclerview.widget.RecyclerView;
 //import com.example.do_an_tot_nghiep.Searchpage.SearchpageActivity;
 
 import com.ndm.ptit.R;
+import com.ndm.ptit.activity.LogInActivity;
+import com.ndm.ptit.api.ApiService;
+import com.ndm.ptit.api.RetrofitClient;
+import com.ndm.ptit.dialogs.DialogUtils;
+import com.ndm.ptit.enitities.BaseResponse;
 import com.ndm.ptit.enitities.Doctor;
 import com.ndm.ptit.enitities.Handbook;
 import com.ndm.ptit.enitities.Setting;
 import com.ndm.ptit.enitities.Speciality;
+import com.ndm.ptit.enitities.speciality.SpecialityResponse;
 import com.ndm.ptit.recyclerview.ButtonRecyclerView;
 import com.ndm.ptit.recyclerview.DoctorRecyclerView;
 import com.ndm.ptit.recyclerview.HandbookRecyclerView;
@@ -101,7 +112,7 @@ public class MainFragment extends Fragment{
         setupRecyclerViewHandbook();
         setupRecyclerViewRecommendedPages();
 
-
+        fetchSpecialities();
 
         return view;
     }
@@ -186,7 +197,7 @@ public class MainFragment extends Fragment{
      * @since 17-11-2022
      * setup recycler view speciality
      */
-    private void setupRecyclerViewSpeciality(List<Speciality> list)
+    private void setupRecyclerViewSpeciality(List<SpecialityResponse> list)
     {
         SpecialityRecyclerView specialityAdapter = new SpecialityRecyclerView(requireActivity(), list, R.layout.recycler_view_element_speciality);
         recyclerViewSpeciality.setAdapter(specialityAdapter);
@@ -427,6 +438,40 @@ public class MainFragment extends Fragment{
         LinearLayoutManager manager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewRecommendedPages.setLayoutManager(manager);
     }
+
+    private void fetchSpecialities() {
+        // Lấy token từ SharedPreferences
+        SharedPreferences prefs = getActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        Call<BaseResponse<SpecialityResponse>> call = apiService.getAllSpecialities("Bearer " + token);
+
+        call.enqueue(new Callback<BaseResponse<SpecialityResponse>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<SpecialityResponse>> call, Response<BaseResponse<SpecialityResponse>> response) {
+                if (response.isSuccessful()) {
+                    BaseResponse<SpecialityResponse> specialityResponse = response.body();
+                    if (specialityResponse != null && specialityResponse.getResult() == 1) {
+                        // Lấy danh sách chuyên khoa
+                        List<SpecialityResponse> specialities = specialityResponse.getData();
+                        setupRecyclerViewSpeciality(specialities);
+
+                    } else {
+                        DialogUtils.showErrorDialog(getContext(), specialityResponse.getMsg());
+                    }
+                } else {
+                    DialogUtils.showErrorDialog(getContext(), "Request failed");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<SpecialityResponse>> call, Throwable t) {
+                DialogUtils.showErrorDialog(getContext(), t.getMessage());
+            }
+        });
+    }
+
 
     /**
      * @since 22-12-2022
