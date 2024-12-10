@@ -18,6 +18,7 @@ import com.ndm.ptit.api.RetrofitClient;
 import com.ndm.ptit.dialogs.DialogUtils;
 import com.ndm.ptit.enitities.login.LoginRequest;
 import com.ndm.ptit.enitities.login.LoginRespone;
+import com.ndm.ptit.utils.Utils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -86,9 +87,10 @@ public class LogInActivity extends AppCompatActivity{
                     LoginRespone loginRespone = response.body();
                     if (loginRespone != null && loginRespone.getResult() == 1) {
                         saveToken(loginRespone.getAccessToken());
+                        Utils.user = loginRespone;
                         Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                         startActivity(intent);
-//                        finish();
+                        finish();
                     } else {
                         DialogUtils.showErrorDialog(LogInActivity.this, loginRespone.getMsg());
                     }

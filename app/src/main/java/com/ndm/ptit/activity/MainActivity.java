@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ndm.ptit.R;
 import com.ndm.ptit.fragment.MainFragment;
+import com.ndm.ptit.fragment.SettingsFragment;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         enableFragment(fragment, fragmentTag);
 
         setupVariable();
+        setupEvent();
         setNumberOnNotificationIcon();
     }
 
@@ -82,43 +84,37 @@ public class MainActivity extends AppCompatActivity {
      * @since 17-11-2022
      * setup event
      */
-//    @SuppressLint("NonConstantResourceId")
-//    private void setupEvent(){
-//        /*set up event when users click on item in bottom navigation view*/
-//        bottomNavigationView.setOnItemSelectedListener(item -> {
-//            /*When ever users click on any icon, we updates the number of unread notifications*/
-//
-//
-//            int shortcut = item.getItemId();
-//            switch (shortcut){
-//                case R.id.shortcutHome:
-////                    setNumberOnNotificationIcon();
-//                    fragment = new MainFragment();
-//                    fragmentTag = "homeFragment";
-//                    break;
-//                case R.id.shortcutNotification:
-////                    setNumberOnNotificationIcon();
-//                    fragment = new MainFragment();
-//                    fragmentTag = "notificationFragment";
-//                    break;
-//                case R.id.shortcutAppointment:
-//                    fragment = new MainFragment();
-//                    fragmentTag = "appointmentFragment";
-//                    break;
-//                case R.id.shortcutPersonality:
-//                    fragment = new MainFragment();
-//                    fragmentTag = "settingsFragment";
-//                    break;
-//            }
-//
-////            enableFragment(fragment, fragmentTag);
-//            return true;
-//        });
-//
-//
-//
-//    }
+    @SuppressLint("NonConstantResourceId")
+    private void setupEvent() {
+        /* Set up event when users click on an item in bottom navigation view */
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            /* Whenever users click on any icon, update the number of unread notifications */
 
+            int shortcut = item.getItemId();
+            if (shortcut == R.id.shortcutHome) {
+                // setNumberOnNotificationIcon();
+                fragment = new MainFragment();
+                fragmentTag = "homeFragment";
+            }
+//        else if (shortcut == R.id.shortcutNotification) {
+//            // setNumberOnNotificationIcon();
+//            // fragment = new MainFragment();
+//            // fragmentTag = "notificationFragment";
+//        }
+//        else if (shortcut == R.id.shortcutAppointment) {
+//            // fragment = new MainFragment();
+//            // fragmentTag = "appointmentFragment";
+//        }
+            else if (shortcut == R.id.shortcutPersonality) {
+
+                fragment = new SettingsFragment();
+                fragmentTag = "settingsFragment";
+            }
+
+            enableFragment(fragment, fragmentTag);
+            return true;
+        });
+    }
 
     /**
      * @author Phong-Kaster

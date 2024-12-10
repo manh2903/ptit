@@ -1,5 +1,8 @@
 package com.ndm.ptit.recyclerview;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -25,7 +28,10 @@ import com.ndm.ptit.R;
 //import com.example.do_an_tot_nghiep.Settingspage.InformationActivity;
 //import com.example.do_an_tot_nghiep.Webpage.WebpageActivity;
 
+import com.ndm.ptit.activity.LogInActivity;
+import com.ndm.ptit.activity.WebpageActivity;
 import com.ndm.ptit.enitities.Setting;
+import com.ndm.ptit.utils.Utils;
 
 import java.util.List;
 
@@ -73,12 +79,22 @@ public class SettingRecyclerView extends RecyclerView.Adapter<SettingRecyclerVie
 //                    context.startActivity(intent);
                     break;
                 case "exit":
-//                    HomepageActivity.getInstance().exit();
+                    if (context instanceof Activity) {
+                        ((Activity) context).getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+                                .edit()
+                                .remove("token")
+                                .apply();
+                        intent = new Intent(context, LogInActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        context.startActivity(intent);
+                        ((Activity) context).finish();
+                    }
                     break;
+
                 case "aboutUs":
-//                    intent = new Intent(context, WebpageActivity.class);
-//                    intent.putExtra("url", Constant.VIDEO_PATH());
-//                    context.startActivity(intent);
+                    intent = new Intent(context, WebpageActivity.class);
+                    intent.putExtra("url", Utils.VIDEO_PATH);
+                    context.startActivity(intent);
                     break;
                 case "information":
 //                    intent = new Intent(context, InformationActivity.class);

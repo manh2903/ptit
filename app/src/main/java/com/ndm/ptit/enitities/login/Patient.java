@@ -115,4 +115,21 @@ public class Patient {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", address='" + address + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", createAt='" + createAt + '\'' +
+                ", updateAt='" + updateAt + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
