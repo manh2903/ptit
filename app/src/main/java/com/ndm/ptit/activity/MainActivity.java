@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ndm.ptit.R;
+import com.ndm.ptit.fragment.AppointmentpageFragment;
 import com.ndm.ptit.fragment.MainFragment;
 import com.ndm.ptit.fragment.SettingsFragment;
 
@@ -101,10 +102,10 @@ public class MainActivity extends AppCompatActivity {
 //            // fragment = new MainFragment();
 //            // fragmentTag = "notificationFragment";
 //        }
-//        else if (shortcut == R.id.shortcutAppointment) {
-//            // fragment = new MainFragment();
-//            // fragmentTag = "appointmentFragment";
-//        }
+        else if (shortcut == R.id.shortcutAppointment) {
+             fragment = new AppointmentpageFragment();
+             fragmentTag = "appointmentFragment";
+        }
             else if (shortcut == R.id.shortcutPersonality) {
 
                 fragment = new SettingsFragment();

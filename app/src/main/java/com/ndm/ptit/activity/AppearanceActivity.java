@@ -54,8 +54,7 @@ public class AppearanceActivity extends AppCompatActivity {
     private void setupComponent()
     {
 //        GlobalVariable globalVariable = (GlobalVariable) this.getApplication();
-//        sharedPreferences = this.getApplication()
-//                .getSharedPreferences(globalVariable.getSharedReferenceKey(), MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
         int darkMode = sharedPreferences.getInt("darkMode", 1);// 1 is off, 2 is on
 
@@ -116,8 +115,8 @@ public class AppearanceActivity extends AppCompatActivity {
         String english = getString(R.string.english);
         String germany = getString(R.string.deutsch);
 
-//        System.out.println(TAG);
-//        System.out.println("application language: " + applicationLanguage);
+        System.out.println(TAG);
+        System.out.println("application language: " + applicationLanguage);
 
         if(Objects.equals(applicationLanguage, vietnamese))
         {

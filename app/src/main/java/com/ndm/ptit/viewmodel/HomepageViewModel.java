@@ -1,4 +1,4 @@
-package com.ndm.ptit.model;
+package com.ndm.ptit.viewmodel;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel;
 //import com.example.do_an_tot_nghiep.Repository.DoctorRepository;
 //import com.example.do_an_tot_nghiep.Repository.SpecialityRepository;
 
-import java.util.Map;
 
 /**
  * @author Phong-Kaster

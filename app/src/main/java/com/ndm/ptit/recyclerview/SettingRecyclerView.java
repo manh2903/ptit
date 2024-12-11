@@ -28,6 +28,7 @@ import com.ndm.ptit.R;
 //import com.example.do_an_tot_nghiep.Settingspage.InformationActivity;
 //import com.example.do_an_tot_nghiep.Webpage.WebpageActivity;
 
+import com.ndm.ptit.activity.AppearanceActivity;
 import com.ndm.ptit.activity.LogInActivity;
 import com.ndm.ptit.activity.WebpageActivity;
 import com.ndm.ptit.enitities.Setting;
@@ -67,8 +68,8 @@ public class SettingRecyclerView extends RecyclerView.Adapter<SettingRecyclerVie
             Intent intent;
             switch (element.getId()){
                 case "appearance":
-//                    intent = new Intent(context, AppearanceActivity.class);
-//                    context.startActivity(intent);
+                    intent = new Intent(context, AppearanceActivity.class);
+                    context.startActivity(intent);
                     break;
                 case "appointmentHistory":
 //                    intent = new Intent(context, AppointmentHistoryActivity.class);

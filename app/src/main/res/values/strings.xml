@@ -147,7 +147,7 @@
     <string name="default_reason">Regelmäßige Gesundheitsuntersuchung</string>
     <string name="bookingStatus">Zeitplanstatus</string>
     <string name="processing">wird bearbeitet</string>
-    <string name="you_do_not_any_appointment">Sie haben keine anstehenden Termine!</string>
+    <string name="you_do_not_any_appointment">Bạn không có lịch hẹn khám nào sắp tới!</string>
     <string name="default_room">Bereich A, 1. Stock, Raum 102</string>
     <string name="default_position">Nummer Ihrer Prüfung: 1</string>
     <string name="remind_me">Erinnere mich</string>
