@@ -48,6 +48,14 @@ public class Appointment {
     @SerializedName("update_at")
     private String updateAt;
 
+    // Room object to represent the room info
+    @SerializedName("room")
+    private Room room;
+
+    // Add the doctor_name field
+    @SerializedName("doctor_name")
+    private String doctorName;
+
     // Getters and Setters
     public int getId() {
         return id;
@@ -167,5 +175,21 @@ public class Appointment {
 
     public void setUpdateAt(String updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
     }
 }

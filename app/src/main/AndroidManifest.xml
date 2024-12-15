@@ -15,6 +15,18 @@
         android:theme="@style/Theme.Ptit"
         tools:targetApi="31">
         <activity
+            android:name=".activity.BookingpageInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BookingpageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DoctorpageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ServicepageActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.AppearanceActivity"
             android:exported="false" />
         <activity

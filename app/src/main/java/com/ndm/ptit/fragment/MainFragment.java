@@ -211,14 +211,14 @@ public class MainFragment extends Fragment{
      * @since 17-11-2022
      * setup recycler view doctor
      */
-    private void setupRecyclerViewDoctor(List<Doctor> list)
-    {
-        DoctorRecyclerView doctorAdapter = new DoctorRecyclerView(requireActivity(), list);
-        recyclerViewDoctor.setAdapter(doctorAdapter);
-
-        LinearLayoutManager manager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewDoctor.setLayoutManager(manager);
-    }
+//    private void setupRecyclerViewDoctor(List<Doctor> list)
+//    {
+//        DoctorRecyclerView doctorAdapter = new DoctorRecyclerView(requireActivity(), list);
+//        recyclerViewDoctor.setAdapter(doctorAdapter);
+//
+//        LinearLayoutManager manager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
+//        recyclerViewDoctor.setLayoutManager(manager);
+//    }
 
 
     /**
