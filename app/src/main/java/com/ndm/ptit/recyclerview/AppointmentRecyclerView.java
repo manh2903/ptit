@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ndm.ptit.R;
+import com.ndm.ptit.activity.AppointmentpageInfoActivity;
 import com.ndm.ptit.enitities.appointment.Appointment;
 import com.squareup.picasso.Picasso;
 
@@ -108,11 +109,11 @@ public class AppointmentRecyclerView extends RecyclerView.Adapter<AppointmentRec
 
         // Set click listener for layout
         holder.layout.setOnClickListener(view -> {
-//            Intent intent = new Intent(context, AppointmentpageInfoActivity.class);
-//            intent.putExtra("id", String.valueOf(recordId));
-//            intent.putExtra("position", String.valueOf(patientPosition));
-//            intent.putExtra("doctorId", String.valueOf(doctorId));
-//            context.startActivity(intent);
+            Intent intent = new Intent(context, AppointmentpageInfoActivity.class);
+            intent.putExtra("id", String.valueOf(recordId));
+            intent.putExtra("position", String.valueOf(patientPosition));
+            intent.putExtra("doctorId", String.valueOf(doctorId));
+            context.startActivity(intent);
         });
     }
 

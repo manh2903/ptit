@@ -74,10 +74,7 @@ import retrofit2.Retrofit;
  * Home fragment
  */
 public class MainFragment extends Fragment{
-
-
     private final String TAG = "Home Fragment";
- //   private GlobalVariable globalVariable;
 
     private RecyclerView recyclerViewSpeciality;
     private RecyclerView recyclerViewDoctor;

@@ -96,7 +96,6 @@ public class AppointmentpageFragment extends Fragment {
         }
 
         ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
-        // Sử dụng currentPage và pageSize cho API request
         Call<BaseResponse<Appointment>> call = apiService.getAllAppointment("Bearer " + token, size, page);
 
         call.enqueue(new Callback<BaseResponse<Appointment>>() {
@@ -112,8 +111,8 @@ public class AppointmentpageFragment extends Fragment {
                         if (newAppointments != null && !newAppointments.isEmpty()) {
                             lytNoAppointment.setVisibility(View.GONE);
                             appointmentRecyclerView.setVisibility(View.VISIBLE);
-                            appointmentsList.addAll(newAppointments);  // Thêm danh sách mới vào danh sách hiện tại
-                            appointmentAdapter.notifyDataSetChanged();  // Cập nhật RecyclerView
+                            appointmentsList.addAll(newAppointments);
+                            appointmentAdapter.notifyDataSetChanged();
                         } else if (appointmentsList.isEmpty()) {
                             lytNoAppointment.setVisibility(View.VISIBLE);
                             appointmentRecyclerView.setVisibility(View.GONE);
