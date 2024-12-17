@@ -25,7 +25,7 @@
     <string name="ok">OK</string>
     <string name="success">Erfolg</string>
     <string name="add_account_info_successfully">Kontoinformationen erfolgreich hinzugefügt</string>
-    <string name="cancel">Stornieren</string>
+    <string name="cancel">Cancel</string>
     <string name="attention">Beachtung</string>
     <string name="oops_there_is_an_issue">Hoppla! Es gibt ein Problem</string>
     <string name="login_successfully">Anmeldung erfolgreich</string>
@@ -89,9 +89,9 @@
     <string name="bookingPhone2">Số điện thoại người đặt lịch</string>
     <string name="patientName">Patientenname (Pflichtfeld)</string>
     <string name="patientName2">Tên bệnh nhân</string>
-    <string name="male">Männlich</string>
-    <string name="female">Female</string>
-    <string name="gender">Weiblich</string>
+    <string name="male">Nam</string>
+    <string name="female">N   ữ</string>
+    <string name="gender">Giới tính</string>
     <string name="patientBirthday">Ngày sinh</string>
     <string name="patientAddress">Adresse</string>
     <string name="patientReason">Lý do khám</string>
@@ -99,13 +99,13 @@
     <string name="appointmentDate2">Ngày khám</string>
     <string name="appointmentTime">Termin (Pflichtfeld)</string>
     <string name="appointmentTime2">Thời gian khám mong muốn</string>
-    <string name="please_fulfill_mandatory_information">Bitte füllen Sie die Angaben vollständig aus, um Zeit für Prüfungsverfahren zu sparen</string>
+    <string name="please_fulfill_mandatory_information">Quý khách vui lòng điền đầy đủ thông tin để tiết kiệm thời gian làm thủ tục</string>
     <string name="note">Notiz</string>
     <string name="note_1">1. Die von Ihnen bereitgestellten Informationen werden beim Ausfüllen Ihrer Informationen als medizinische Untersuchungsunterlagen verwendet:</string>
     <string name="note_2">\t* Geben Sie den Vor- und Nachnamen an, z. B. den Anfangsbuchstaben groß schreiben: <b>Nguyen Thanh Phong</b></string>
     <string name="note_3">\t* Füllen Sie es vollständig und korrekt aus und überprüfen Sie die Informationen bitte noch einmal, bevor Sie auf Bestätigen klicken</string>
     <string name="note_4">2. Bitte beachten Sie beim Besuch der Klinik die Seuchenschutzbestimmungen (Maskentragen, Desinfizieren, Deklaration der Epidemiologie)..</string>
-    <string name="note_5">Indem Sie Ihre Buchung bestätigen, stimmen Sie unseren Nutzungsbedingungen vollständig zu.</string>
+    <string name="note_5">Bằng việc xác nhận đặt khám, bạn đã hoàn toàn đồng ý với Điều khoản sử dụng dịch vụ của chúng tôi</string>
     <string name="code_male">1</string>
     <string name="code_female">0</string>
     <string name="default_appointment_time">09:00</string>
@@ -198,7 +198,7 @@
     <string name="vietnamese">Tiếng Việt</string>
     <string name="english">English</string>
     <string name="none">Keiner</string>
-    <string name="upload">Hochladen</string>
+    <string name="upload">UPLOAD</string>
     <string name="email">Email</string>
     <string name="email_example">example@gmail.com</string>
     <string name="your_name">Dein Name</string>
@@ -212,7 +212,7 @@
     <string name="save">Speichern</string>
     <string name="click_on_your_avatar_to_select_new_photo">Klicken Sie auf Ihren Avatar, um ein neues Foto auszuwählen</string>
     <string name="guide">Cẩm nang</string>
-    <string name="next">Nächste</string>
+    <string name="next">Tiếp tục</string>
     <string name="title">Titel</string>
     <string name="content">Inhalt</string>
     <string name="you_are_missing_mandatory_field">Ihnen fehlt ein Pflichtfeld !</string>

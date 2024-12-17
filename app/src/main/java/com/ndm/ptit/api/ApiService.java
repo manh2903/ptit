@@ -4,6 +4,8 @@ import com.ndm.ptit.enitities.BaseResponse;
 import com.ndm.ptit.enitities.BaseResponse2;
 import com.ndm.ptit.enitities.appointment.Appointment;
 import com.ndm.ptit.enitities.appointment.DetailAppointment;
+import com.ndm.ptit.enitities.booking.Booking;
+import com.ndm.ptit.enitities.booking.BookingImage;
 import com.ndm.ptit.enitities.doctor.DoctorResponse;
 import com.ndm.ptit.enitities.login.LoginRequest;
 import com.ndm.ptit.enitities.login.LoginRespone;
@@ -17,12 +19,22 @@ import com.ndm.ptit.enitities.signup.SignUpResponse;
 import com.ndm.ptit.enitities.speciality.SpecialityResponse;
 import com.ndm.ptit.enitities.treatment.Treatment;
 
+import java.util.Map;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -79,6 +91,24 @@ public interface ApiService {
             @Header("Authorization") String token
     );
 
+    @GET("/api/patient/booking/{id}")
+    Call<BaseResponse2<Booking>> getBookingByID(
+            @Header("Authorization") String token,
+            @Path("id") int id
+    );
+
+    @DELETE("/api/patient/booking/{id}")
+    Call<BaseResponse2<Booking>> putBookingCancel(
+            @Header("Authorization") String token,
+            @Path("id") int id
+    );
+
+    @GET("/api/booking/photos/{id}")
+    Call<BaseResponse<BookingImage>> getBookingImageByID(
+            @Header("Authorization") String token,
+            @Path("id") int id
+    );
+
     @GET("api/services/{id}")
     Call<ServicesResponse> getServiceById(
             @Header("Authorization") String token,
@@ -95,5 +125,20 @@ public interface ApiService {
     Call<BaseResponse2<DoctorResponse>> getDoctorID(
             @Header("Authorization") String token,
             @Path("id") int id
+    );
+
+    @POST("/api/patient/booking")
+    @FormUrlEncoded
+    Call<ResponseBody> createBooking(
+            @Header("Authorization") String token,
+            @FieldMap Map<String, String> body
+    );
+
+    @Multipart
+    @POST("/api/booking/photos")
+    Call<ResponseBody> uploadBookingPhoto(
+            @Header("Authorization") String token,
+            @Part MultipartBody.Part photo,
+            @Part("booking_id") RequestBody bookingId
     );
 }

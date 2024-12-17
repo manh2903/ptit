@@ -280,19 +280,14 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <!-- BUTTON BACK -->
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_marginVertical="10dp"
-                android:id="@+id/btnPhoto"
-                android:text="@string/photo"
-                android:textSize="12sp"
-                android:textColor="@color/colorTextWhite"
-                android:textAllCaps="false"
-                android:background="@drawable/button_style_booking"
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:padding="20dp"
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <!-- BUTTON CANCEL -->
+
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_marginVertical="10dp"
                 android:id="@+id/btnCancel"
