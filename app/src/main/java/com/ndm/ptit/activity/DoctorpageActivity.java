@@ -69,7 +69,7 @@ public class DoctorpageActivity extends AppCompatActivity {
         btnBack.setOnClickListener(view -> finish());
 
         btnCreateBooking.setOnClickListener(view -> {
-            Intent intent = new Intent(this,               BookingpageActivity.class);
+            Intent intent = new Intent(this, BookingpageActivity.class);
             intent.putExtra("doctorId", doctorId);
             startActivity(intent);
         });

@@ -12,6 +12,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.widget.LinearLayout;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +29,8 @@ import com.ndm.ptit.R;
 import com.ndm.ptit.api.ApiService;
 import com.ndm.ptit.api.RetrofitClient;
 import com.ndm.ptit.dialogs.DialogUtils;
+import com.ndm.ptit.enitities.BaseResponse2;
+import com.ndm.ptit.enitities.booking.Booking;
 import com.ndm.ptit.enitities.booking.BookingImage;
 import com.ndm.ptit.helper.Dialog;
 import com.ndm.ptit.helper.LoadingScreen;
@@ -80,6 +84,8 @@ public class BookingFragment3 extends Fragment {
             body = (Map<String, String>) bundle.getSerializable("body");
         }
 
+        Log.d("body 2 ", body.toString());
+
         setupComponent(view);
         setupEvent();
         setupRecyclerView();
@@ -90,7 +96,6 @@ public class BookingFragment3 extends Fragment {
     private void setupComponent(View view) {
         Bundle bundle = getArguments();
         assert bundle != null;
-        bookingId = bundle.getString("bookingId");
 
         context = requireContext();
         activity = requireActivity();
@@ -109,6 +114,29 @@ public class BookingFragment3 extends Fragment {
         adapter = new BookingPhotoRecyclerView(context, list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                // Không hỗ trợ kéo thả
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                // Lấy vị trí của item bị vuốt
+                int position = viewHolder.getAdapterPosition();
+
+                // Xóa ảnh khỏi danh sách
+                list.remove(position);
+
+                // Cập nhật adapter
+                adapter.notifyItemRemoved(position);
+            }
+        });
+
+        // Gán ItemTouchHelper cho RecyclerView
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     private void setupEvent() {
@@ -120,24 +148,29 @@ public class BookingFragment3 extends Fragment {
         });
 
         btnNext.setOnClickListener(view -> {
-                createBookingApiCall();
+            createBookingApiCall();
         });
     }
 
-    private void uploadPhotoToServer(Uri fileUri) {
+    private void uploadPhotoToServer(Uri fileUri, int bookingId) {
         File file = new File(getRealPathFromURI(fileUri));
+        if (!file.exists()) {
+            DialogUtils.showErrorDialog(getContext(), "File không tồn tại, vui lòng kiểm tra.");
+            return;
+        }
+
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("photo", file.getName(), requestFile);
-        RequestBody bookingIdPart = RequestBody.create(MediaType.parse("text/plain"), bookingId);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+        RequestBody bookingIdPart = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(bookingId));
 
         SharedPreferences prefs = getContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String token = prefs.getString("token", null);
         if (token == null || token.isEmpty()) {
-            DialogUtils.showErrorDialog(getContext(), "Token is missing. Please log in again.");
+            DialogUtils.showErrorDialog(getContext(), "Token bị thiếu. Vui lòng đăng nhập lại.");
             return;
         }
-        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
 
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
         apiService.uploadBookingPhoto("Bearer " + token, body, bookingIdPart)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
@@ -147,15 +180,15 @@ public class BookingFragment3 extends Fragment {
                             requireActivity().getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.frameLayout, nextFragment)
                                     .addToBackStack("bookingFragment2")
-                                    .commit();
+                                    .commitAllowingStateLoss();
                         } else {
-                            DialogUtils.showErrorDialog(getContext(), "Failed to uploadPhotoToServer");
+                            DialogUtils.showErrorDialog(getContext(), "Lỗi tải ảnh lên: " + response.message());
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        DialogUtils.showErrorDialog(getContext(), "uploadPhotoToServer failed: " + t.getMessage());
+                        DialogUtils.showErrorDialog(getContext(), "uploadPhotoToServer thất bại: " + t.getMessage());
                     }
                 });
     }
@@ -169,33 +202,48 @@ public class BookingFragment3 extends Fragment {
             return;
         }
 
-
         ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
         apiService.createBooking("Bearer " + token, body)
-                .enqueue(new Callback<ResponseBody>() {
+                .enqueue(new Callback<BaseResponse2<Booking>>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                        if (response.isSuccessful()) {
-                            // Upload images after successful booking creation
-                            uploadImagesAfterBookingCreation();
+                    public void onResponse(Call<BaseResponse2<Booking>> call, Response<BaseResponse2<Booking>> response) {
+                        if (response.isSuccessful() && response.body() != null && response.body().getResult() == 1) {
+                            Booking bookings = response.body().getData();
+                            if (bookings != null) {
+                                if (list.size() > 0) {
+                                    uploadImagesAfterBookingCreation(bookings.getId());
+                                } else {
+                                    BookingFragment2 nextFragment = new BookingFragment2();
+                                    requireActivity().getSupportFragmentManager().beginTransaction()
+                                            .replace(R.id.frameLayout, nextFragment)
+                                            .addToBackStack("bookingFragment2")
+                                            .commitAllowingStateLoss();
+                                }
+                            } else {
+                                DialogUtils.showErrorDialog(getContext(), "Failed to retrieve booking details.");
+                            }
                         } else {
-                            // Handle error in booking creation
-                            DialogUtils.showErrorDialog(getContext(), "Failed to create booking");
+                            // Handle server error or validation error
+                            String errorMessage = "An error occurred.";
+                            if (response.body() != null && response.body().getMsg() != null) {
+                                errorMessage = response.body().getMsg(); // Get error message from server response
+                            }
+                            DialogUtils.showErrorDialog(getContext(), errorMessage);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(Call<BaseResponse2<Booking>> call, Throwable t) {
                         DialogUtils.showErrorDialog(getContext(), "Booking creation failed: " + t.getMessage());
                     }
                 });
     }
 
-    private void uploadImagesAfterBookingCreation() {
+
+    private void uploadImagesAfterBookingCreation(int bookingId) {
         for (BookingImage image : list) {
             Uri fileUri = Uri.parse(image.getUrl());
-            uploadPhotoToServer(fileUri);
+            uploadPhotoToServer(fileUri, bookingId);
         }
     }
 
@@ -225,13 +273,10 @@ public class BookingFragment3 extends Fragment {
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri selectedImageUri = data.getData();
-
-
-
-                BookingImage bookingImage = new BookingImage();
-                bookingImage.setUrl(selectedImageUri.toString());
-                list.add(bookingImage);
-                adapter.notifyItemInserted(list.size() - 1);
+            BookingImage bookingImage = new BookingImage();
+            bookingImage.setUrl(selectedImageUri.toString());
+            list.add(bookingImage);
+            adapter.notifyItemInserted(list.size() - 1);
 
         }
     }

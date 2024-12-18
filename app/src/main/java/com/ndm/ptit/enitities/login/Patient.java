@@ -5,15 +5,15 @@ public class Patient {
     private String email;
     private String phone;
     private String name;
-    private String gender;
+    private int gender;
     private String birthday;
     private String address;
     private String avatar;
-    private String createAt;
-    private String updateAt;
+    private String create_at;
+    private String update_at;
     private String password;
 
-    public Patient(Long id, String email, String phone, String name, String gender, String birthday, 
+    public Patient(Long id, String email, String phone, String name, int gender, String birthday,
                    String address, String avatar, String createAt, String updateAt) {
         this.id = id;
         this.email = email;
@@ -23,8 +23,8 @@ public class Patient {
         this.birthday = birthday;
         this.address = address;
         this.avatar = avatar;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
+        this.create_at = createAt;
+        this.update_at = updateAt;
     }
 
 
@@ -60,11 +60,11 @@ public class Patient {
         this.name = name;
     }
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -93,19 +93,19 @@ public class Patient {
     }
 
     public String getCreateAt() {
-        return createAt;
+        return create_at;
     }
 
     public void setCreateAt(String createAt) {
-        this.createAt = createAt;
+        this.create_at = createAt;
     }
 
     public String getUpdateAt() {
-        return updateAt;
+        return update_at;
     }
 
     public void setUpdateAt(String updateAt) {
-        this.updateAt = updateAt;
+        this.update_at = updateAt;
     }
 
     public String getPassword() {
@@ -127,8 +127,8 @@ public class Patient {
                 ", birthday='" + birthday + '\'' +
                 ", address='" + address + '\'' +
                 ", avatar='" + avatar + '\'' +
-                ", createAt='" + createAt + '\'' +
-                ", updateAt='" + updateAt + '\'' +
+                ", createAt='" + create_at + '\'' +
+                ", updateAt='" + update_at + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

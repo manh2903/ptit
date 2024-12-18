@@ -21,6 +21,7 @@ import com.ndm.ptit.api.RetrofitClient;
 import com.ndm.ptit.dialogs.DialogUtils;
 import com.ndm.ptit.enitities.BaseResponse;
 import com.ndm.ptit.enitities.BaseResponse2;
+import com.ndm.ptit.enitities.BaseResponse3;
 import com.ndm.ptit.enitities.booking.Booking;
 import com.ndm.ptit.enitities.booking.BookingImage;
 import com.ndm.ptit.helper.Dialog;
@@ -162,6 +163,37 @@ public class BookingpageInfoActivity extends AppCompatActivity {
         });
     }
 
+    private void fetchCancel () {
+        SharedPreferences prefs = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+        int id = Integer.parseInt(bookingId);
+
+        if (token == null || token.isEmpty()) {
+            DialogUtils.showErrorDialog(this, "Token is missing. Please log in again.");
+            return;
+        }
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        Call<BaseResponse3> call = apiService.putBookingCancel("Bearer " + token, id);
+
+        call.enqueue(new Callback<BaseResponse3>() {
+            @Override
+            public void onResponse(Call<BaseResponse3> call, Response<BaseResponse3> response) {
+                if (response.isSuccessful()) {
+                    BaseResponse3 baseResponse3 = response.body();
+                    DialogUtils.showErrorDialog(BookingpageInfoActivity.this, baseResponse3.getMsg());
+                } else {
+                    DialogUtils.showErrorDialog(BookingpageInfoActivity.this, "Failed to fetch booking information.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse3> call, Throwable t) {
+                Log.e(TAG, "Error: " + Objects.requireNonNull(t.getMessage()));
+                DialogUtils.showErrorDialog(BookingpageInfoActivity.this, "Error: " + t.getMessage());
+            }
+        });
+    }
+
     private void bindData(Booking booking) {
         // Gán dữ liệu vào các TextView
         txtBookingName.setText(booking.getBookingName());
@@ -176,6 +208,9 @@ public class BookingpageInfoActivity extends AppCompatActivity {
 
         String status = booking.getStatus();
         bookingStatus = status;
+        if(bookingStatus.toLowerCase().equals("cancel")){
+            btnCancel.setVisibility(View.GONE);
+        }
 
 
     }
@@ -193,7 +228,7 @@ public class BookingpageInfoActivity extends AppCompatActivity {
         btnCancel.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                fetchCancel();
             }
         }));
     }

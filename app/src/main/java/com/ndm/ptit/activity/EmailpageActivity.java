@@ -1,7 +1,7 @@
 package com.ndm.ptit.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
@@ -14,47 +14,47 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ndm.ptit.R;
-import com.ndm.ptit.fragment.BookingFragment1;
+import com.ndm.ptit.fragment.EmailFragment1;
+import com.ndm.ptit.helper.Tooltip;
 
-public class BookingpageActivity extends AppCompatActivity {
-    private final String TAG = "Booking-page Activity";
+public class EmailpageActivity extends AppCompatActivity {
+
     private ImageButton btnBack;
     private final FragmentManager manager = getSupportFragmentManager();
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bookingpage);
-        setupBookingFragment1();
+        setContentView(R.layout.activity_emailpage);
+
+        setupEmailFragment1();
         setupComponent();
         setupEvent();
     }
 
-    private void setupBookingFragment1()
+
+    private void setupEmailFragment1()
     {
-        String fragmentTag = "BookingFragment1";
-        Fragment fragment = new BookingFragment1();
+        String fragmentTag = "EmailFragment1";
+        Fragment fragment = new EmailFragment1();
 
-
-        /*Step 1*/
         FragmentTransaction transaction = manager.beginTransaction();
-
-
-        String serviceId = getIntent().getStringExtra("serviceId");
-        String doctorId = getIntent().getStringExtra("doctorId");
-
-        Bundle bundle = new Bundle();
-        bundle.putString("serviceId", serviceId);
-        bundle.putString("doctorId", doctorId);
-        fragment.setArguments(bundle);
-
 
         transaction.replace(R.id.frameLayout, fragment, fragmentTag);
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
     private void setupComponent()
     {
         btnBack = findViewById(R.id.btnBack);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        Tooltip.setLocale(this, sharedPreferences);
     }
 
     private void setupEvent()
@@ -62,4 +62,9 @@ public class BookingpageActivity extends AppCompatActivity {
         btnBack.setOnClickListener(view-> finish());
     }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        finish();
+    }
 }

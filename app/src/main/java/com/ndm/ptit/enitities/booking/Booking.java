@@ -11,7 +11,7 @@ public class Booking {
     private String birthday;
     private String address;
     private String reason;
-    private String appointmentTime;
+    private String appointment_time;
     private String status;
     private String createAt;
     private String updateAt;
@@ -87,11 +87,11 @@ public class Booking {
     }
 
     public String getAppointmentTime() {
-        return appointmentTime;
+        return appointment_time;
     }
 
     public void setAppointmentTime(String appointmentTime) {
-        this.appointmentTime = appointmentTime;
+        this.appointment_time = appointmentTime;
     }
 
     public String getStatus() {
@@ -149,5 +149,24 @@ public class Booking {
         public void setName(String name) {
             this.name = name;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "id=" + id +
+                ", bookingName='" + bookingName + '\'' +
+                ", bookingPhone='" + bookingPhone + '\'' +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", birthday='" + birthday + '\'' +
+                ", address='" + address + '\'' +
+                ", reason='" + reason + '\'' +
+                ", appointment_Time='" + appointment_time + '\'' +
+                ", status='" + status + '\'' +
+                ", createAt='" + createAt + '\'' +
+                ", updateAt='" + updateAt + '\'' +
+                ", service=" + service +
+                '}';
     }
 }

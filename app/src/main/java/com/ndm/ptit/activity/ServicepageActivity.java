@@ -26,6 +26,7 @@ import com.ndm.ptit.enitities.services.Services;
 import com.ndm.ptit.enitities.services.ServicesResponse;
 import com.ndm.ptit.helper.LoadingScreen;
 import com.ndm.ptit.recyclerview.DoctorRecyclerView;
+import com.ndm.ptit.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -71,6 +72,7 @@ public class ServicepageActivity extends AppCompatActivity {
     private void setupComponent()
     {
         serviceId = getIntent().getStringExtra("serviceId");
+        Utils.service = serviceId;
 
         dialog = new Dialog(this);
         loadingScreen = new LoadingScreen(this);

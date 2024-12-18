@@ -2,6 +2,7 @@ package com.ndm.ptit.api;
 
 import com.ndm.ptit.enitities.BaseResponse;
 import com.ndm.ptit.enitities.BaseResponse2;
+import com.ndm.ptit.enitities.BaseResponse3;
 import com.ndm.ptit.enitities.appointment.Appointment;
 import com.ndm.ptit.enitities.appointment.DetailAppointment;
 import com.ndm.ptit.enitities.booking.Booking;
@@ -9,6 +10,7 @@ import com.ndm.ptit.enitities.booking.BookingImage;
 import com.ndm.ptit.enitities.doctor.DoctorResponse;
 import com.ndm.ptit.enitities.login.LoginRequest;
 import com.ndm.ptit.enitities.login.LoginRespone;
+import com.ndm.ptit.enitities.login.Patient;
 import com.ndm.ptit.enitities.notification.Notification;
 import com.ndm.ptit.enitities.notification.ReadResponse;
 import com.ndm.ptit.enitities.record.RecordRespone;
@@ -98,7 +100,7 @@ public interface ApiService {
     );
 
     @DELETE("/api/patient/booking/{id}")
-    Call<BaseResponse2<Booking>> putBookingCancel(
+    Call<BaseResponse3> putBookingCancel(
             @Header("Authorization") String token,
             @Path("id") int id
     );
@@ -128,11 +130,15 @@ public interface ApiService {
     );
 
     @POST("/api/patient/booking")
-    @FormUrlEncoded
-    Call<ResponseBody> createBooking(
+    Call<BaseResponse2<Booking>> createBooking(
             @Header("Authorization") String token,
-            @FieldMap Map<String, String> body
+            @Body Map<String, String> body
     );
+    @GET("/api/patient/booking")
+    Call<BaseResponse<Booking>> bookingReadALl(
+            @Header("Authorization") String token
+    );
+
 
     @Multipart
     @POST("/api/booking/photos")
@@ -141,4 +147,22 @@ public interface ApiService {
             @Part MultipartBody.Part photo,
             @Part("booking_id") RequestBody bookingId
     );
+
+    @GET("/api/patient/profile")
+    Call<BaseResponse2<Patient>> readPersionalInformation(
+            @Header("Authorization") String token
+    );
+
+    @PUT("/api/patient/profile")
+    Call<BaseResponse2<Patient>> changeInformation(
+            @Header("Authorization") String token,
+            @Body Map<String, String> body
+    );
+
+    @Multipart
+    @PUT("/api/patient/profile/avatar")
+    Call<BaseResponse2<String>> uploadAvatar(
+            @Header("Authorization") String token,
+            @Part MultipartBody.Part avatarFile);
+
 }

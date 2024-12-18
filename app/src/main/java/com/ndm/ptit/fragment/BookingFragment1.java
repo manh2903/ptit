@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,7 +110,7 @@ public class  BookingFragment1 extends Fragment {
 
         Bundle bundle = getArguments();
         assert bundle != null;
-        serviceId = bundle.getString("serviceId") != null ? bundle.getString("serviceId") : "";
+        serviceId = bundle.getString("serviceId") != null ? bundle.getString("serviceId") : Utils.service;
         doctorId = bundle.getString("doctorId") != null ? bundle.getString("doctorId") : "0";
 
         System.out.println(TAG);
@@ -277,22 +278,24 @@ public class  BookingFragment1 extends Fragment {
 
             // Tạo Map chứa dữ liệu
             Map<String, String> body = new HashMap<>();
-            body.put("serviceId", serviceId);
+            body.put("service_id", serviceId);
             body.put("patient_id", String.valueOf(Utils.user.getData().getId()));
-            body.put("doctorId", doctorId);
-            body.put("bookingName", bookingName);
-            body.put("bookingPhone", bookingPhone);
+            body.put("doctor_id", doctorId);
+            body.put("booking_name", bookingName);
+            body.put("booking_phone", bookingPhone);
             body.put("name", patientName);
             body.put("gender", patientGender);
             body.put("address", patientAddress);
             body.put("reason", patientReason);
             body.put("birthday", patientBirthday);
-            body.put("appointmentTime", appointmentTime);
-            body.put("appointmentDate", appointmentDate);
+            body.put("appointment_time", appointmentDate + " " + appointmentTime);
+//            body.put("appointmentDate", appointmentDate);
 
 
             Bundle bundle = new Bundle();
             bundle.putSerializable("body", (Serializable) body);
+
+            Log.d("body 1 ",body.toString());
 
 
             String fragmentTag = "bookingFragment3";
