@@ -202,18 +202,15 @@ public class InformationActivity extends AppCompatActivity {
     }
 
     private void uploadAvatar(Uri imageUri) {
-        // Kiểm tra xem ảnh có hợp lệ không
         if (imageUri == null) {
             Toast.makeText(this, "Please select an image.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Chuyển Uri thành file
         File file = new File(getRealPathFromURI(imageUri));
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("filename", file.getName(), requestFile);
 
-        // Lấy token từ SharedPreferences
         SharedPreferences prefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String token = prefs.getString("token", null);
         if (token == null || token.isEmpty()) {
@@ -236,7 +233,6 @@ public class InformationActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<BaseResponse2<String>> call, Throwable t) {
-                // Lỗi khi gửi yêu cầu
                 Log.d("Upload", t.getMessage());
                 Toast.makeText(InformationActivity.this, "Upload failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
