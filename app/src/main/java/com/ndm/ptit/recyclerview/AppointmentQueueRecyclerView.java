@@ -47,8 +47,8 @@ public class AppointmentQueueRecyclerView extends RecyclerView.Adapter<Appointme
         String numericalOrder = String.valueOf(appointment.getNumericalOrder());
         String patientName = appointment.getPatientName();
 
-        holder.elementNumericalOrder.setText(numericalOrder);
-        holder.elementPatientName.setText(patientName);
+        holder.elementNumericalOrder.setText(String.valueOf(yourPosition));
+        holder.elementPatientName.setText(patientName  + " " + numericalOrder);
 
 
         /*position == 0 means he is the first one of the list*/

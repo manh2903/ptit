@@ -41,6 +41,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ndm.ptit.R;
 import com.ndm.ptit.activity.LogInActivity;
+import com.ndm.ptit.activity.SearchpageActivity;
 import com.ndm.ptit.api.ApiService;
 import com.ndm.ptit.api.RetrofitClient;
 import com.ndm.ptit.dialogs.DialogUtils;
@@ -227,34 +228,31 @@ public class MainFragment extends Fragment{
     {
         /*SEARCH BAR*/
         searchBar.setOnClickListener(view->{
-//            Intent intent = new Intent(requireContext(), SearchpageActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(requireContext(), SearchpageActivity.class);
+            startActivity(intent);
         });
 
 
         /*TXT READ MORE SPECIALITY*/
         txtReadMoreSpeciality.setOnClickListener(view->{
-//            Intent intent = new Intent(context, SearchpageActivity.class);
-//            String filterKey  = context.getString(R.string.speciality);
-//
-//            intent.putExtra("filterKey", filterKey );
-//            startActivity(intent);
+            Intent intent = new Intent(context, SearchpageActivity.class);
+            String filterKey  = context.getString(R.string.speciality);
+
+            intent.putExtra("filterKey", filterKey );
+            startActivity(intent);
         });
 
         /*TXT READ MORE DOCTOR*/
         txtReadMoreDoctor.setOnClickListener(view->{
-//            Intent intent = new Intent(context, SearchpageActivity.class);
-//            String filterKey  = context.getString(R.string.doctor);
-//
-//            intent.putExtra("filterKey", filterKey );
-//            startActivity(intent);
+            Intent intent = new Intent(context, SearchpageActivity.class);
+            String filterKey  = context.getString(R.string.doctor);
+
+            intent.putExtra("filterKey", filterKey );
+            startActivity(intent);
         });
     }
 
-    /**
-     * @since 20-12-2022
-     * setup recycler view button
-     */
+
     private void setupRecyclerViewButton()
     {
         Setting setting0 = new Setting(R.drawable.ic_i_exam_speciality, "specialityExamination", getString(R.string.speciality_examination) );

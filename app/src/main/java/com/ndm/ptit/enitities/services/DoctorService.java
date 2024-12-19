@@ -12,8 +12,8 @@ public class DoctorService {
     private String role;
     private int active;
     private String avatar;
-    private String createAt;
-    private String updateAt;
+    private String create_At;
+    private String update_At;
     private SpecialityResponse speciality;
     private int roomId;
     private String recoveryToken;
@@ -31,8 +31,8 @@ public class DoctorService {
         this.role = role;
         this.active = active;
         this.avatar = avatar;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
+        this.create_At = createAt;
+        this.update_At = updateAt;
         this.speciality = speciality;
         this.roomId = roomId;
         this.recoveryToken = recoveryToken;
@@ -111,19 +111,19 @@ public class DoctorService {
     }
 
     public String getCreateAt() {
-        return createAt;
+        return create_At;
     }
 
     public void setCreateAt(String createAt) {
-        this.createAt = createAt;
+        this.create_At = createAt;
     }
 
     public String getUpdateAt() {
-        return updateAt;
+        return update_At;
     }
 
     public void setUpdateAt(String updateAt) {
-        this.updateAt = updateAt;
+        this.update_At = updateAt;
     }
 
     public SpecialityResponse getSpecialityId() {

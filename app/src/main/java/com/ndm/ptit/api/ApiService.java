@@ -14,7 +14,9 @@ import com.ndm.ptit.enitities.login.Patient;
 import com.ndm.ptit.enitities.notification.Notification;
 import com.ndm.ptit.enitities.notification.ReadResponse;
 import com.ndm.ptit.enitities.record.RecordRespone;
+import com.ndm.ptit.enitities.services.DoctorService;
 import com.ndm.ptit.enitities.services.DoctorServiceResponse;
+import com.ndm.ptit.enitities.services.Services;
 import com.ndm.ptit.enitities.services.ServicesResponse;
 import com.ndm.ptit.enitities.signup.SignUpRequest;
 import com.ndm.ptit.enitities.signup.SignUpResponse;
@@ -47,7 +49,7 @@ public interface ApiService {
     @POST("api/login")
     Call<SignUpResponse> signup(@Body SignUpRequest signUpRequest);
 
-    @GET("api/specialites")
+    @GET("api/specialities")
     Call<BaseResponse<SpecialityResponse>> getAllSpecialities(
             @Header("Authorization") String token
     );
@@ -164,5 +166,29 @@ public interface ApiService {
     Call<BaseResponse2<String>> uploadAvatar(
             @Header("Authorization") String token,
             @Part MultipartBody.Part avatarFile);
+
+    @GET("/api/doctors")
+    Call<BaseResponse<DoctorService>> doctorReadAll(
+            @Header("Authorization") String token);
+
+    @GET("/api/specialities")
+    Call<BaseResponse<SpecialityResponse>> specialityReadAll(
+            @Header("Authorization") String token);
+
+    @GET("/api/services")
+    Call<BaseResponse<Services>> serviceReadAll(
+            @Header("Authorization") String token);
+
+    @GET("api/specialities/{id}")
+    Call<BaseResponse2<SpecialityResponse>> getSpecialityByID(
+            @Header("Authorization") String token,
+            @Path("id") int id
+    );
+
+    @GET("api/doctors/speciality/{id}")
+    Call<DoctorServiceResponse> getDoctorBySpecial(
+            @Header("Authorization") String token,
+            @Path("id") int id
+    );
 
 }
