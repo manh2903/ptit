@@ -33,6 +33,7 @@ import com.ndm.ptit.enitities.login.Patient;
 import com.ndm.ptit.helper.Dialog;
 import com.ndm.ptit.helper.LoadingScreen;
 
+import com.ndm.ptit.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -219,9 +220,10 @@ public class InformationActivity extends AppCompatActivity {
         }
 
 
+        Log.d("token",token);
 
         ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
-        apiService.uploadAvatar(body, "Bearer " + token).enqueue(new Callback<BaseResponse2<String>>() {
+        apiService.uploadAvatar(body, "Bearer " + token, Integer.parseInt(String.valueOf(Utils.user.getData().getId()))).enqueue(new Callback<BaseResponse2<String>>() {
             @Override
             public void onResponse(Call<BaseResponse2<String>> call, Response<BaseResponse2<String>> response) {
                 if (response.isSuccessful()) {
