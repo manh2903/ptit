@@ -190,17 +190,9 @@ public class  BookingFragment1 extends Fragment {
             calendar.set(Calendar.MONTH, month1);
             calendar.set(Calendar.DAY_OF_MONTH, day1);
 
-            String dayFormatted = String.valueOf(day1);
-            String monthFormatted = String.valueOf(month1+1);// add 1 unit because 0 <= month <=11
+            String dayFormatted = day1 < 10 ? "0" + day1 : String.valueOf(day1);
+            String monthFormatted = (month1 + 1) < 10 ? "0" + (month1 + 1) : String.valueOf(month1 + 1);
 
-            if( day1 < 10)
-            {
-                dayFormatted = "0" + day1;
-            }
-            if( month1 < 10 )
-            {
-                monthFormatted = "0" + month1;
-            }
             String output = year1 + "-" + monthFormatted + "-" + dayFormatted;
             txtPatientBirthday.setText(output);
         };
@@ -211,19 +203,13 @@ public class  BookingFragment1 extends Fragment {
             calendar.set(Calendar.MONTH, month1);
             calendar.set(Calendar.DAY_OF_MONTH, day1);
 
-            String dayFormatted = String.valueOf(day1);
-            String monthFormatted = String.valueOf(month1+1);
-            if( day1 < 10)
-            {
-                dayFormatted = "0" + day1;
-            }
-            if( month1 < 10 )
-            {
-                monthFormatted = "0" + month1;
-            }
+            String dayFormatted = day1 < 10 ? "0" + day1 : String.valueOf(day1);
+            String monthFormatted = (month1 + 1) < 10 ? "0" + (month1 + 1) : String.valueOf(month1 + 1);
+
             String output = year1 + "-" + monthFormatted + "-" + dayFormatted;
             txtAppointmentDate.setText(output);
         };
+
 
         /*TIME PICKER FOR APPOINTMENT TIME*/
         TimePickerDialog.OnTimeSetListener appointmentTimeDialog = (timePicker, hour, minute) -> {

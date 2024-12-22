@@ -218,8 +218,10 @@ public class InformationActivity extends AppCompatActivity {
             return;
         }
 
+
+
         ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
-        apiService.uploadAvatar("Bearer " + token, body).enqueue(new Callback<BaseResponse2<String>>() {
+        apiService.uploadAvatar(body, "Bearer " + token).enqueue(new Callback<BaseResponse2<String>>() {
             @Override
             public void onResponse(Call<BaseResponse2<String>> call, Response<BaseResponse2<String>> response) {
                 if (response.isSuccessful()) {

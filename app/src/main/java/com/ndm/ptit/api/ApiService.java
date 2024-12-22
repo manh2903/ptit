@@ -164,8 +164,8 @@ public interface ApiService {
     @Multipart
     @PUT("/api/patient/profile/avatar")
     Call<BaseResponse2<String>> uploadAvatar(
-            @Header("Authorization") String token,
-            @Part MultipartBody.Part avatarFile);
+            @Part MultipartBody.Part avatarFile,
+            @Header("Authorization") String token);
 
     @GET("/api/doctors")
     Call<BaseResponse<DoctorService>> doctorReadAll(

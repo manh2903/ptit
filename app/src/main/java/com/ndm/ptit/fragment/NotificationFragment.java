@@ -98,6 +98,7 @@ public class NotificationFragment extends Fragment implements NotificationRecycl
     private void setupEvent() {
         txtMarkAllAsRead.setOnClickListener(view -> {
             allAsRead();
+            fetchTreatment();
         });
 
         swipeRefreshLayout.setOnRefreshListener(() -> {

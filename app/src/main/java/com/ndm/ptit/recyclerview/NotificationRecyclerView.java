@@ -55,7 +55,7 @@ public class NotificationRecyclerView extends RecyclerView.Adapter<NotificationR
         String message = notification.getMessage();
         int recordId = notification.getRecordId();
         String recordType = notification.getRecordType();
-        String createAt = Tooltip.beautifierDatetime(context, notification.getCreateAt() );
+        String createAt =notification.getCreateAt();
         int isRead = notification.getIsRead();
 
         /*set text color*/

@@ -13,6 +13,9 @@ public class Patient {
     private String update_at;
     private String password;
 
+    public Patient() {
+    }
+
     public Patient(Long id, String email, String phone, String name, int gender, String birthday,
                    String address, String avatar, String createAt, String updateAt) {
         this.id = id;
