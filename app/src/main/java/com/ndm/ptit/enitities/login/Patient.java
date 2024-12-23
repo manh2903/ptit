@@ -30,7 +30,6 @@ public class Patient {
         this.update_at = updateAt;
     }
 
-
     public Long getId() {
         return id;
     }
@@ -40,7 +39,7 @@ public class Patient {
     }
 
     public String getEmail() {
-        return email;
+        return email != null ? email : "";
     }
 
     public void setEmail(String email) {
@@ -48,7 +47,7 @@ public class Patient {
     }
 
     public String getPhone() {
-        return phone;
+        return phone != null ? phone : "";
     }
 
     public void setPhone(String phone) {
@@ -56,7 +55,7 @@ public class Patient {
     }
 
     public String getName() {
-        return name;
+        return name != null ? name : "";
     }
 
     public void setName(String name) {
@@ -72,7 +71,7 @@ public class Patient {
     }
 
     public String getBirthday() {
-        return birthday;
+        return birthday != null ? birthday : "";
     }
 
     public void setBirthday(String birthday) {
@@ -80,7 +79,7 @@ public class Patient {
     }
 
     public String getAddress() {
-        return address;
+        return address != null ? address : "";
     }
 
     public void setAddress(String address) {
@@ -88,7 +87,7 @@ public class Patient {
     }
 
     public String getAvatar() {
-        return avatar;
+        return avatar != null ? avatar : "";
     }
 
     public void setAvatar(String avatar) {
@@ -96,7 +95,7 @@ public class Patient {
     }
 
     public String getCreateAt() {
-        return create_at;
+        return create_at != null ? create_at : "";
     }
 
     public void setCreateAt(String createAt) {
@@ -104,7 +103,7 @@ public class Patient {
     }
 
     public String getUpdateAt() {
-        return update_at;
+        return update_at != null ? update_at : "";
     }
 
     public void setUpdateAt(String updateAt) {
@@ -112,7 +111,7 @@ public class Patient {
     }
 
     public String getPassword() {
-        return password;
+        return password != null ? password : "";
     }
 
     public void setPassword(String password) {
@@ -123,16 +122,16 @@ public class Patient {
     public String toString() {
         return "Patient{" +
                 "id=" + id +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", name='" + name + '\'' +
-                ", gender='" + gender + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", address='" + address + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", createAt='" + create_at + '\'' +
-                ", updateAt='" + update_at + '\'' +
-                ", password='" + password + '\'' +
+                ", email='" + (email != null ? email : "") + '\'' +
+                ", phone='" + (phone != null ? phone : "") + '\'' +
+                ", name='" + (name != null ? name : "") + '\'' +
+                ", gender=" + gender +
+                ", birthday='" + (birthday != null ? birthday : "") + '\'' +
+                ", address='" + (address != null ? address : "") + '\'' +
+                ", avatar='" + (avatar != null ? avatar : "") + '\'' +
+                ", createAt='" + (create_at != null ? create_at : "") + '\'' +
+                ", updateAt='" + (update_at != null ? update_at : "") + '\'' +
+                ", password='" + (password != null ? password : "") + '\'' +
                 '}';
     }
 }
