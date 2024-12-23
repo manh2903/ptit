@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -85,6 +86,10 @@ public class AppointmentpageInfoActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
 
+    private Handler handler;
+    private Runnable fetchDetailsRunnable;
+    private final long FETCH_INTERVAL = 60000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +98,27 @@ public class AppointmentpageInfoActivity extends AppCompatActivity {
         setupComponent();
         fetchAppointmentDetails();
         initListen();
+
+        handler = new Handler();
+        fetchDetailsRunnable = new Runnable() {
+            @Override
+            public void run() {
+                fetchAppointmentDetails();
+                handler.postDelayed(this, FETCH_INTERVAL);
+            }
+        };
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler.post(fetchDetailsRunnable);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        handler.removeCallbacks(fetchDetailsRunnable);
     }
 
 
