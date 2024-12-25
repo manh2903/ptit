@@ -210,7 +210,7 @@ public class InformationActivity extends AppCompatActivity {
 
         File file = new File(getRealPathFromURI(imageUri));
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("filename", file.getName(), requestFile);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
         SharedPreferences prefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String token = prefs.getString("token", null);
@@ -219,8 +219,6 @@ public class InformationActivity extends AppCompatActivity {
             return;
         }
 
-
-        Log.d("token",token);
 
         ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
         apiService.uploadAvatar(body, "Bearer " + token, Integer.parseInt(String.valueOf(Utils.user.getData().getId()))).enqueue(new Callback<BaseResponse2<String>>() {

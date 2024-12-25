@@ -164,7 +164,7 @@ public interface ApiService {
     @Multipart
     @PUT("/api/patient/profile/avatar/{id}")
     Call<BaseResponse2<String>> uploadAvatar(
-            @Part MultipartBody.Part avatarFile,
+            @Part MultipartBody.Part filename,
             @Header("Authorization") String token,
             @Path("id") int id);
 

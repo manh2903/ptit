@@ -55,7 +55,7 @@ public class AppointmentpageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_appointmentpage, container, false);
         setupComponent(view);
         setupRecyclerView();
-        fetchAppointment(size); // Gọi API lần đầu
+        fetchAppointment(page); // Gọi API lần đầu
         return view;
     }
 
