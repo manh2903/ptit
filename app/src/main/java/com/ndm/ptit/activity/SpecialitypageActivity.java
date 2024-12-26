@@ -20,10 +20,12 @@ import com.ndm.ptit.dialogs.DialogUtils;
 import com.ndm.ptit.enitities.Speciality;
 import com.ndm.ptit.enitities.services.DoctorService;
 import com.ndm.ptit.enitities.services.DoctorServiceResponse;
+import com.ndm.ptit.enitities.speciality.SpecialityResponse;
 import com.ndm.ptit.helper.Dialog;
 import com.ndm.ptit.helper.GlobalVariable;
 import com.ndm.ptit.helper.LoadingScreen;
 import com.ndm.ptit.recyclerview.DoctorRecyclerView;
+import com.ndm.ptit.recyclerview.DoctorRecyclerViewSpeciality;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -121,6 +123,7 @@ public class SpecialitypageActivity extends AppCompatActivity {
                     Log.d("response.body()", doctorResponse.toString());
                     if (doctorResponse.getResult() == 1) {
                         List<DoctorService> doctors = doctorResponse.getData();
+                        printSpecialityInformation(doctors.get(0).getSpecialityId());
                         setupDoctorRecyclerView(doctors);
                     } else {
                         DialogUtils.showErrorDialog(SpecialitypageActivity.this, doctorResponse.getMsg());
@@ -141,7 +144,7 @@ public class SpecialitypageActivity extends AppCompatActivity {
 
     private void setupDoctorRecyclerView(List<DoctorService> list)
     {
-        DoctorRecyclerView doctorAdapter = new DoctorRecyclerView(this, list);
+        DoctorRecyclerViewSpeciality doctorAdapter = new DoctorRecyclerViewSpeciality(this, list);
         recyclerViewDoctor.setAdapter(doctorAdapter);
 
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -149,7 +152,7 @@ public class SpecialitypageActivity extends AppCompatActivity {
     }
 
 
-    private void printSpecialityInformation(Speciality speciality)
+    private void printSpecialityInformation(SpecialityResponse speciality)
     {
         String name = speciality.getName();
         String description = "<html>" +

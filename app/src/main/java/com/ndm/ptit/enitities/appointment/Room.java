@@ -12,6 +12,15 @@ public class Room {
     @SerializedName("location")
     private String location;
 
+    public Room() {
+    }
+
+    public Room(int id, String name, String location) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+    }
+
     // Getters and Setters
     public int getId() {
         return id;
@@ -22,7 +31,7 @@ public class Room {
     }
 
     public String getName() {
-        return name;
+        return name != null ? name : "";
     }
 
     public void setName(String name) {
@@ -30,7 +39,7 @@ public class Room {
     }
 
     public String getLocation() {
-        return location;
+        return location != null ? location : "";
     }
 
     public void setLocation(String location) {

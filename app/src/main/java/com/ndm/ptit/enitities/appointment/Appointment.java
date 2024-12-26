@@ -175,6 +175,9 @@ public class Appointment {
     }
 
     public Room getRoom() {
+        if(room == null){
+            return new Room();
+        }
         return room;
     }
 
@@ -188,5 +191,28 @@ public class Appointment {
 
     public void setDoctorName(String doctorName) {
         this.doctorName = doctorName;
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "id=" + id +
+                ", bookingId=" + bookingId +
+                ", doctorId=" + doctorId +
+                ", patientId=" + patientId +
+                ", patientName='" + patientName + '\'' +
+                ", patientBirthday='" + patientBirthday + '\'' +
+                ", patientReason='" + patientReason + '\'' +
+                ", patientPhone='" + patientPhone + '\'' +
+                ", numericalOrder=" + numericalOrder +
+                ", position=" + position +
+                ", appointmentTime='" + appointmentTime + '\'' +
+                ", date='" + date + '\'' +
+                ", status='" + status + '\'' +
+                ", createAt='" + createAt + '\'' +
+                ", updateAt='" + updateAt + '\'' +
+                ", room=" + room +
+                ", doctorName='" + doctorName + '\'' +
+                '}';
     }
 }

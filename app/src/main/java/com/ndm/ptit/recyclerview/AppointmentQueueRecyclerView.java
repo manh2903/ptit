@@ -46,24 +46,13 @@ public class AppointmentQueueRecyclerView extends RecyclerView.Adapter<Appointme
         int yourPosition = appointment.getPosition();
         String numericalOrder = String.valueOf(appointment.getNumericalOrder());
         String patientName = appointment.getPatientName();
+        String status = appointment.getStatus();
 
-        holder.elementNumericalOrder.setText(String.valueOf(yourPosition));
+        holder.elementNumericalOrder.setText(String.valueOf(yourPosition)+". ");
         holder.elementPatientName.setText(patientName  + " " + numericalOrder);
 
 
         /*position == 0 means he is the first one of the list*/
-        if( position == 0 )
-        {
-            holder.elementStatus.setVisibility(View.VISIBLE);
-            holder.elementNumericalOrder.setTextColor(context.getResources().getColor(R.color.colorGreen, null));
-            holder.elementPatientName.setTextColor(context.getResources().getColor(R.color.colorGreen, null));
-        }
-        else
-        {
-            holder.elementStatus.setVisibility(View.GONE);
-            holder.elementNumericalOrder.setTextColor(context.getResources().getColor(R.color.colorTextBlack, null));
-            holder.elementPatientName.setTextColor(context.getResources().getColor(R.color.colorTextBlack, null));
-        }
 
         /*if your position in queue lays on the list-> highlight your position with orange color & send notification*/
         if( yourPosition == myPosition)
@@ -83,6 +72,21 @@ public class AppointmentQueueRecyclerView extends RecyclerView.Adapter<Appointme
 //            String bigText = patientName + " ơi! Hãy chuẩn bị, sắp tới lượt khám của bạn rồi!";
 //            notification.setup(title, text, bigText );
 //            notification.show();
+        }
+
+        if( status.equals("EXAMINATING") )
+        {
+            holder.elementStatus.setText(R.string.now);
+            holder.elementStatus.setVisibility(View.VISIBLE);
+            holder.elementStatus.setTextColor(context.getResources().getColor(R.color.colorGreen, null));
+            holder.elementNumericalOrder.setTextColor(context.getResources().getColor(R.color.colorGreen, null));
+            holder.elementPatientName.setTextColor(context.getResources().getColor(R.color.colorGreen, null));
+        }
+        else
+        {
+            holder.elementStatus.setVisibility(View.GONE);
+            holder.elementNumericalOrder.setTextColor(context.getResources().getColor(R.color.colorTextBlack, null));
+            holder.elementPatientName.setTextColor(context.getResources().getColor(R.color.colorTextBlack, null));
         }
 
     }

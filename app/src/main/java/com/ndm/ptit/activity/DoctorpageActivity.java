@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class DoctorpageActivity extends AppCompatActivity {
     private static final String TAG = "Doctor-page Activity";
 
     private String doctorId;
+    private String speciality;
     private CircleImageView imgAvatar;
     private TextView txtName;
     private TextView txtSpeciality;
@@ -63,6 +65,10 @@ public class DoctorpageActivity extends AppCompatActivity {
         loadingScreen = new LoadingScreen(this);
         btnBack = findViewById(R.id.btnBack);
         btnCreateBooking = findViewById(R.id.btnCreateBooking);
+        speciality = getIntent().getStringExtra("speciality");
+        if(speciality != null){
+            btnCreateBooking.setVisibility(View.GONE);
+        }
     }
 
     private void setupEvent() {

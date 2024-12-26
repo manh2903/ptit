@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ndm.ptit.R;
+import com.ndm.ptit.activity.AlarmpageActivity;
 import com.ndm.ptit.activity.AppointmentpageInfoActivity;
 import com.ndm.ptit.enitities.appointment.Appointment;
 import com.squareup.picasso.Picasso;
@@ -47,6 +48,7 @@ public class AppointmentRecyclerView extends RecyclerView.Adapter<AppointmentRec
     public void onBindViewHolder(@NonNull ViewHolder holder, int index) {
         Appointment appointment = list.get(index);
 
+        int bookingid = appointment.getBookingId();
         int recordId = appointment.getId();
         int doctorId = appointment.getDoctorId();
         int patientPosition = appointment.getPosition();
@@ -65,8 +67,20 @@ public class AppointmentRecyclerView extends RecyclerView.Adapter<AppointmentRec
 //        }
 
         // Set status and visibility for buttons
+        int avatar = R.drawable.default_avatar;
+        if(bookingid == 1){
+            avatar = R.drawable.default_speciality;
+        }
+
+        Picasso.get().load(avatar).into(holder.doctorAvatar);
 
         switch (status) {
+            case "EXAMINATING":
+                holder.default_reason2.setVisibility(View.VISIBLE);
+                holder.btnRemindMe.setVisibility(View.GONE);
+                holder.statusDone.setVisibility(View.GONE);
+                holder.statusCancel.setVisibility(View.GONE);
+                break;
             case "PROCESSING":
                 holder.btnRemindMe.setVisibility(View.VISIBLE);
                 holder.statusDone.setVisibility(View.GONE);
@@ -96,15 +110,10 @@ public class AppointmentRecyclerView extends RecyclerView.Adapter<AppointmentRec
 
         // Remind Me button action
         holder.btnRemindMe.setOnClickListener(view -> {
-            Toast.makeText(context, context.getString(R.string.you_will_get_notification_as_soon_as_your_turn), Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, context.getString(R.string.you_will_get_notification_as_soon_as_your_turn), Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(context, AlarmpageActivity.class);
+            context.startActivity(intent);
 
-//            Intent intent = new Intent(context, AppointmentpageService.class);
-//            intent.putExtra("recordId", String.valueOf(recordId));
-//            intent.putExtra("recordType", "appointment");
-//            intent.putExtra("doctorName", doctorName);
-//            intent.putExtra("doctorId", String.valueOf(doctorId));
-//            intent.putExtra("position", String.valueOf(patientPosition));
-//            ContextCompat.startForegroundService(context, intent);
         });
 
         // Set click listener for layout
@@ -133,6 +142,7 @@ public class AppointmentRecyclerView extends RecyclerView.Adapter<AppointmentRec
         private final AppCompatButton btnRemindMe;
         private final TextView statusDone;
         private final TextView statusCancel;
+        private final TextView default_reason2;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -145,6 +155,7 @@ public class AppointmentRecyclerView extends RecyclerView.Adapter<AppointmentRec
             btnRemindMe = itemView.findViewById(R.id.elementBtnRemindMe);
             statusDone = itemView.findViewById(R.id.elementStatusDone);
             statusCancel = itemView.findViewById(R.id.elementStatusCancel);
+            default_reason2 = itemView.findViewById(R.id.default_reason2);
         }
     }
 }

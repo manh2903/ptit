@@ -297,7 +297,8 @@
                 android:textAllCaps="false"
                 android:background="@drawable/button_style_danger"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
             <TextView
                 android:textSize="12sp"

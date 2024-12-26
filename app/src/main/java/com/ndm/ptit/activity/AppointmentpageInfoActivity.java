@@ -217,6 +217,8 @@ public class AppointmentpageInfoActivity extends AppCompatActivity {
     }
 
     private void displayAppointmentDetails(Appointment detail) {
+        Log.d("detail",detail.toString());
+
         txtDoctorName.setText(detail.getDoctorName());
         txtSpecialityName.setText(detail.getRoom().getName());
         txtLocation.setText(detail.getRoom().getLocation());
@@ -259,6 +261,7 @@ public class AppointmentpageInfoActivity extends AppCompatActivity {
         }
     }
     private void setupRecyclerView(List<Appointment_queue> appointmentQueue) {
+        appointmentQueue.removeIf(item -> "CANCEL".equals(item.getStatus()) || "DONE".equals(item.getStatus()));
         AppointmentQueueRecyclerView adapter = new AppointmentQueueRecyclerView(this,appointmentQueue,myPosition2);
         appointmentQueueRecyclerView.setAdapter(adapter);
         appointmentQueueRecyclerView.setLayoutManager(new LinearLayoutManager(this));

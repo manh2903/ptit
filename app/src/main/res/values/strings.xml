@@ -145,6 +145,7 @@
     <string name="my_birthday">01–05–2022</string>
     <string name="my_address">14 Ly Tu Trong, Ben Nghe, Bezirk 1, Ho-Chi-Minh-Stadt</string>
     <string name="default_reason">Lý do khám</string>
+    <string name="default_reason2">Đã đến lượt</string>
     <string name="bookingStatus">Zeitplanstatus</string>
     <string name="processing">wird bearbeitet</string>
     <string name="you_do_not_any_appointment">Bạn không có lịch hẹn khám nào sắp tới!</string>
@@ -166,7 +167,7 @@
     <string name="watch_medical_treatment">Xem phác đồ điều trị </string>
     <string name="you_can_read_again_in_settings"><![CDATA[Bạn có thể truy cập Cá nhân -> Lịch sử khám bệnh đẻ xem lại thông tin sau này]]></string>
     <string name="appointment_queue">Danh sách thứ tự khám</string>
-    <string name="now">Jetzt</string>
+    <string name="now">Hiện tại</string>
     <string name="you">Bạn</string>
     <string name="medical_record_information">Thông tin bệnh án</string>
     <string name="statusBefore">Tình trạng trước điều trị</string>

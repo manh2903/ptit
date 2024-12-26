@@ -131,6 +131,8 @@ public class Booking {
         private int id;
         private String name;
 
+        private String image;
+
         public Service() {
         }
 
@@ -149,6 +151,23 @@ public class Booking {
         public void setName(String name) {
             this.name = name;
         }
+
+        public String getAvatar() {
+            return image;
+        }
+
+        public void setAvatar(String avatar) {
+            this.image = avatar;
+        }
+
+        @Override
+        public String toString() {
+            return "Service{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", avatar='" + image + '\'' +
+                    '}';
+        }
     }
 
     @Override
@@ -166,7 +185,7 @@ public class Booking {
                 ", status='" + status + '\'' +
                 ", createAt='" + createAt + '\'' +
                 ", updateAt='" + updateAt + '\'' +
-                ", service=" + service +
+                ", service=" + service.toString() +
                 '}';
     }
 }

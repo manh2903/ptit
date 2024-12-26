@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ndm.ptit.R;
 import com.ndm.ptit.activity.BookingpageInfoActivity;
 import com.ndm.ptit.enitities.booking.Booking;
+import com.ndm.ptit.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -53,19 +54,21 @@ public class BookingRecyclerView extends RecyclerView.Adapter<BookingRecyclerVie
         holder.serviceName.setText(serviceName);
 
 
-//        if( element.getService().getImage().length() > 0)
-//        {
-//            String serviceImage = Constant.UPLOAD_URI() + element.getService().getImage();
-//            Picasso.get().load(serviceImage).into(holder.serviceImage);
-//        }
+        if(element.getService().getAvatar() != null)
+        {
+            String serviceImage = element.getService().getAvatar();
+            Picasso.get().load(serviceImage).into(holder.serviceImage);
+        }
 
         String datetime = element.getAppointmentTime();
         holder.datetime.setText(datetime);
 
-        String bookingName = context.getString(R.string.bookingName2) + ": " + element.getBookingName();
+        String bookingNameText = element.getBookingName() != null ? element.getBookingName() : Utils.user.getData().getName();
+        String bookingName = context.getString(R.string.bookingName2) + ": " + bookingNameText;
         holder.bookingName.setText(bookingName);
 
-        String bookingPhone = context.getString(R.string.bookingPhone2) + ": " + element.getBookingPhone();
+        String bookingPhoneText = element.getBookingPhone() != null ? element.getBookingPhone() : Utils.user.getData().getPhone();
+        String bookingPhone = context.getString(R.string.bookingPhone2) + ": " + bookingPhoneText;
         holder.bookingPhone.setText(bookingPhone);
 
         String patientName = context.getString(R.string.patientName2) + ": " + element.getName();
@@ -78,17 +81,17 @@ public class BookingRecyclerView extends RecyclerView.Adapter<BookingRecyclerVie
         String status = element.getStatus();
         /*Show appointment status or button remind me*/
         switch (status){
-            case "verified":
+            case "VERIFIED":
                 holder.statusDone.setVisibility(View.VISIBLE);
                 holder.statusCancel.setVisibility(View.GONE);
                 holder.statusProcessing.setVisibility(View.GONE);
                 break;
-            case "cancelled":
+            case "CANCEL":
                 holder.statusDone.setVisibility(View.GONE);
                 holder.statusCancel.setVisibility(View.VISIBLE);
                 holder.statusProcessing.setVisibility(View.GONE);
                 break;
-            case "processing":
+            case "PROCESSING":
                 holder.statusDone.setVisibility(View.GONE);
                 holder.statusCancel.setVisibility(View.GONE);
                 holder.statusProcessing.setVisibility(View.VISIBLE);

@@ -54,6 +54,7 @@ import com.ndm.ptit.enitities.services.DoctorService;
 import com.ndm.ptit.enitities.speciality.SpecialityResponse;
 import com.ndm.ptit.recyclerview.ButtonRecyclerView;
 import com.ndm.ptit.recyclerview.DoctorRecyclerView;
+import com.ndm.ptit.recyclerview.DoctorRecyclerViewSpeciality;
 import com.ndm.ptit.recyclerview.HandbookRecyclerView;
 import com.ndm.ptit.recyclerview.SpecialityRecyclerView;
 
@@ -147,7 +148,7 @@ public class MainFragment extends Fragment {
 
 
     private void setupRecyclerViewDoctor(List<DoctorService> list) {
-        DoctorRecyclerView doctorAdapter = new DoctorRecyclerView(requireActivity(), list);
+        DoctorRecyclerViewSpeciality doctorAdapter = new DoctorRecyclerViewSpeciality(requireActivity(), list);
         recyclerViewDoctor.setAdapter(doctorAdapter);
 
         LinearLayoutManager manager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);

@@ -27,6 +27,7 @@ import com.ndm.ptit.enitities.booking.BookingImage;
 import com.ndm.ptit.helper.Dialog;
 import com.ndm.ptit.helper.LoadingScreen;
 import com.ndm.ptit.recyclerview.BookingPhotoRecyclerView;
+import com.ndm.ptit.utils.Utils;
 
 import java.util.List;
 import java.util.Objects;
@@ -196,8 +197,8 @@ public class BookingpageInfoActivity extends AppCompatActivity {
 
     private void bindData(Booking booking) {
         // Gán dữ liệu vào các TextView
-        txtBookingName.setText(booking.getBookingName());
-        txtBookingPhone.setText(booking.getBookingPhone());
+        txtBookingName.setText(Utils.user.getData().getName());
+        txtBookingPhone.setText(booking.getBookingPhone() != null ? booking.getBookingPhone() : Utils.user.getData().getPhone());
         txtPatientName.setText(booking.getName());
         txtPatientAddress.setText(booking.getAddress());
         txtPatientBirthday.setText(booking.getBirthday());
@@ -208,8 +209,8 @@ public class BookingpageInfoActivity extends AppCompatActivity {
 
         String status = booking.getStatus();
         bookingStatus = status;
-        if(bookingStatus.toLowerCase().equals("cancel")){
-            btnCancel.setVisibility(View.GONE);
+        if(bookingStatus.equals("PROCESSING")){
+            btnCancel.setVisibility(View.VISIBLE);
         }
 
 

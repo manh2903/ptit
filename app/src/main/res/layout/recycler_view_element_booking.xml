@@ -86,7 +86,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start|center_vertical"
-                android:text="@string/cancel"
                 android:textColor="@color/colorRed"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -100,7 +99,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="start|center_vertical"
                 android:textSize="12sp"
-                android:text="@string/done"
                 android:textColor="@color/colorGreen"
                 android:textStyle="bold"
                 android:drawableStart="@drawable/ic_appointment_done" />
@@ -112,10 +110,10 @@
                 android:layout_height="wrap_content"
                 android:gravity="start|center_vertical"
                 android:textSize="12sp"
-                android:text="@string/processing"
                 android:textColor="@color/colorGreen"
                 android:textStyle="bold"
-                android:drawableStart="@drawable/ic_appointment_processing" />
+                android:drawableStart="@drawable/ic_appointment_processing"
+                android:drawableTint="@color/colorYellow" />
         </LinearLayout>
 
     </LinearLayout>
